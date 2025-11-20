@@ -59,7 +59,7 @@ class Home extends Component {
               className="ipl-logo"
               alt="ipl logo"
             />
-            <h1 className="ipl-dash-board-heading">IPL DashBoard</h1>
+            <h1 className="ipl-dashboard-heading">IPL DashBoard</h1>
           </div>
           {isLoading ? this.renderLoader() : this.renderTeamsaList()}
         </div>
