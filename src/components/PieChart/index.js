@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/no-array-index-key */
 import {
   PieChart as PieChartComponent,
   Pie,
@@ -16,7 +14,10 @@ const PieChart = props => {
   const {data} = props
 
   return (
-    <div className="pie-chart-bg-container mt-2 d-flex justify-content-center">
+    <div
+      className="pie-chart-bg-container mt-2 d-flex justify-content-center"
+      testid="pieChart"
+    >
       <PieChartComponent width={400} height={350}>
         <Pie
           data={data}

@@ -53,21 +53,33 @@ class TeamMatches extends Component {
     this.setState({teamMatchesData: formattedData, isLoading: false})
   }
 
-  getNoOfMatches = value => {
+  getNoOfMatches = () => {
     const {teamMatchesData} = this.state
     const {latestMatch, recentMatches} = teamMatchesData
-    const currentMatch = value === latestMatch.matchStatus ? 1 : 0
-    const result =
-      recentMatches.filter(match => match.matchStatus === value).length +
-      currentMatch
-    return result
+    let won=0
+    let lost=0
+    let drawn=0
+    //Count the latest matches
+    if (latestMatch.matchStatus === 'Won') won++
+    else if (latestMatch.matchStatus === 'Lost') lost++
+    else drawn++
+    //Count the recent matches
+    recentMatches.forEach(match => {
+      if (match.matchStatus === 'Won') won++
+      else if (match.matchStatus === 'Lost') lost++
+      else drawn++
+    })
+    return {won, lost, drawn}
   }
 
-  generatePieChartData = () => [
-    {name: 'Won', value: this.getNoOfMatches('Won')},
-    {name: 'Lost', value: this.getNoOfMatches('Lost')},
-    {name: 'Drawn', value: this.getNoOfMatches('Drawn')},
-  ]
+  generatePieChartData = () => {
+    const count = this.getNoOfMatches()
+    return [
+      {name: 'Won', value: count.won},
+      {name: 'Lost', value: count.lost},
+      {name: 'Drawn', value: count.drawn},
+    ]
+  }
 
   renderRecentMatchesList = () => {
     const {teamMatchesData} = this.state
@@ -85,11 +97,11 @@ class TeamMatches extends Component {
   renderTeamMatches = () => {
     const {teamMatchesData} = this.state
     const {teamBannerURL, latestMatch} = teamMatchesData
-    console.log(this.generatePieChartData())
+    //console.log(this.generatePieChartData())
     return (
       <div className="responsive-container">
         <img src={teamBannerURL} alt="team banner" className="team-banner" />
-        <LatestMatch latestMatch={latestMatch} />
+        <LatestMatch latestMatchDetails={latestMatch} />
         <h1 className="latest-match-heading mt-3">Team Statistics</h1>
         <PieChart data={this.generatePieChartData()} />
         {this.renderRecentMatchesList()}
