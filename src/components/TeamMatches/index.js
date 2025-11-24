@@ -56,9 +56,9 @@ class TeamMatches extends Component {
   getNoOfMatches = () => {
     const {teamMatchesData} = this.state
     const {latestMatch, recentMatches} = teamMatchesData
-    let won=0
-    let lost=0
-    let drawn=0
+    let won = 0
+    let lost = 0
+    let drawn = 0
     //Count the latest matches
     if (latestMatch.matchStatus === 'Won') won++
     else if (latestMatch.matchStatus === 'Lost') lost++
