@@ -59,15 +59,13 @@ class TeamMatches extends Component {
     let won = 0
     let lost = 0
     let drawn = 0
-    //Count the latest matches
-    if (latestMatch.matchStatus === 'Won') won++
-    else if (latestMatch.matchStatus === 'Lost') lost++
-    else drawn++
-    //Count the recent matches
+    if (latestMatch.matchStatus === 'Won') won += 1
+    else if (latestMatch.matchStatus === 'Lost') lost += 1
+    else drawn += 1
     recentMatches.forEach(match => {
-      if (match.matchStatus === 'Won') won++
-      else if (match.matchStatus === 'Lost') lost++
-      else drawn++
+      if (match.matchStatus === 'Won') won += 1
+      else if (match.matchStatus === 'Lost') lost += 1
+      else drawn += 1
     })
     return {won, lost, drawn}
   }
@@ -97,7 +95,6 @@ class TeamMatches extends Component {
   renderTeamMatches = () => {
     const {teamMatchesData} = this.state
     const {teamBannerURL, latestMatch} = teamMatchesData
-    //console.log(this.generatePieChartData())
     return (
       <div className="responsive-container">
         <img src={teamBannerURL} alt="team banner" className="team-banner" />
@@ -115,7 +112,7 @@ class TeamMatches extends Component {
   }
 
   renderLoader = () => (
-    <div testid="loader" className="loader-container">
+    <div className="loader-container">
       <Loader type="Oval" color="#ffffff" height={50} />
     </div>
   )

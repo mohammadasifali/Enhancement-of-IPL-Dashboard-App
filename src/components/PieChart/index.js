@@ -12,12 +12,9 @@ const COLORS = ['#00C49F', '#FF8042', '#FFBB28']
 
 const PieChart = props => {
   const {data} = props
-
+  console.log(data)
   return (
-    <div
-      className="pie-chart-bg-container mt-2 d-flex justify-content-center"
-      testid="pieChart"
-    >
+    <div className="pie-chart-bg-container mt-2 d-flex justify-content-center">
       <PieChartComponent width={400} height={350}>
         <Pie
           data={data}
@@ -26,8 +23,8 @@ const PieChart = props => {
           dataKey="value"
           label
         >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          {data.map(() => (
+            <Cell fill={COLORS[COLORS.length]} />
           ))}
         </Pie>
         <Tooltip />
